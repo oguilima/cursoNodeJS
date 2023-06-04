@@ -3,7 +3,7 @@ const Pet = require("../models/Pet")
 //helpers
 const getToken = require("../helpers/get-token")
 const getUserByToken = require("../helpers/get-user-by-token")
-const ObjetcId = require("mongoose").Types.ObjectId
+const ObjectId = require("mongoose").Types.ObjectId
 
 module.exports = class PetController{
 
@@ -119,7 +119,7 @@ module.exports = class PetController{
     static async getPetById(req, res){
         const id = req.params.id
 
-        if(!ObjetcId.isValid(id)){
+        if(!ObjectId.isValid(id)){
             res.status(422).json({message: "Id Inválido!"})
             return
         }
@@ -142,7 +142,7 @@ module.exports = class PetController{
         const id = req.params.id
 
         //check if id is valid
-        if(!ObjetcId.isValid(id)){
+        if(!ObjectId.isValid(id)){
             res.status(422).json({message: "Id Inválido!"})
             return
         }
@@ -227,10 +227,7 @@ module.exports = class PetController{
             updatedData.color = color
         }
 
-        if(images.length === 0){
-            res.status(422).json({message: "A imagem é obrigatória!"})
-            return
-        }else{
+        if(images.length > 0){
             updatedData.images = []
 
             images.map((image) => {
@@ -312,7 +309,7 @@ module.exports = class PetController{
         await Pet.findByIdAndUpdate(id, pet)
 
         res.status(200).json({
-            message: "Parabéns, o clico de adoção foi finalizado com sucesso!"
+            message: "Parabéns, o ciclo de adoção foi finalizado com sucesso!"
         })
     }
 }

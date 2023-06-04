@@ -207,9 +207,6 @@ module.exports = class UserController {
         data: updatedUser,
       })
     } catch (error) {
-
-      console.log(' ERROOOOOOOOOOOOOO ' + error )
-
       res.status(500).json({ message: error })
     }
   }
